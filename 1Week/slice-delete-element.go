@@ -45,4 +45,4 @@ func removeSliceElement3(slice interface{}, element interface{}) interface{} {
 	return slice
 }
 
-//要求四：支持缩容，并旦设计缩容机制。
+//要求四：支持缩容，并且设计缩容机制。
