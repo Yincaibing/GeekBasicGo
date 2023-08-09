@@ -2,10 +2,10 @@ package service
 
 //代表的是领域服务（domain service）， 代表一个业务的完整的处理过程
 import (
-	"GeekBasicGo/gin/webook/internal/domain"
-	"GeekBasicGo/gin/webook/internal/repository"
 	"context"
 	"errors"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/domain"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

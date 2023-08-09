@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/internal/repository"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/internal/repository/dao"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/internal/service"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/internal/web"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository/dao"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/service"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web"
+	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web/middleware"
+	_ "github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web/middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -17,7 +19,8 @@ import (
 
 func main() {
 	db := initDB()
-	server := initWebServer()
+
+	server := initWebserver()
 
 	u := initUser(db)
 	u.RegisterRoutes(server)
@@ -58,7 +61,7 @@ func initWebserver() *gin.Engine {
 	store := cookie.NewStore([]byte("secret"))
 	server.Use(sessions.Sessions("mysession", store))
 	// 步骤3
-	server.Use(NewLoginMiddlewareBuilder().
+	server.Use(middleware.NewLoginMiddlewareBuilder().
 		IgnorePaths("/users/signup").
 		IgnorePaths("/users/login").Build())
 
@@ -82,14 +85,13 @@ func initUser(db *gorm.DB) *web.UserHandler {
 }
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:13316)/webook"))
+	db, err := gorm.Open(mysql.Open("root:ycbpassword@tcp(localhost:3306)/webook"))
 	if err != nil {
 		// 我只会在初始化过程中 panic
 		// panic 相当于整个 goroutine 结束
 		// 一旦初始化过程出错，应用就不要启动了
 		panic(err)
 	}
-
 	err = dao.InitTable(db)
 	if err != nil {
 		panic(err)
