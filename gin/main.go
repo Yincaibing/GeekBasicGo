@@ -26,30 +26,6 @@ func main() {
 
 }
 
-func initUser(db *gorm.DB) *web.UserHandler {
-	ud := dao.NewUserDAO(db)
-	repo := repository.NewUserRepository(ud)
-	svc := service.NewUserService(repo)
-	u := web.NewUserHandler(svc)
-	return u
-}
-
-func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:13316)/webook"))
-	if err != nil {
-		// 我只会在初始化过程中 panic
-		// panic 相当于整个 goroutine 结束
-		// 一旦初始化过程出错，应用就不要启动了
-		panic(err)
-	}
-
-	err = dao.InitTable(db)
-	if err != nil {
-		panic(err)
-	}
-	return db
-}
-
 func initWebserver() *gin.Engine {
 	server := gin.Default()
 
@@ -95,4 +71,28 @@ func initWebserver() *gin.Engine {
 	//server1.Use(middleware.CheckLogin())
 	return server
 
+}
+
+func initUser(db *gorm.DB) *web.UserHandler {
+	ud := dao.NewUserDAO(db)
+	repo := repository.NewUserRepository(ud)
+	svc := service.NewUserService(repo)
+	u := web.NewUserHandler(svc)
+	return u
+}
+
+func initDB() *gorm.DB {
+	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:13316)/webook"))
+	if err != nil {
+		// 我只会在初始化过程中 panic
+		// panic 相当于整个 goroutine 结束
+		// 一旦初始化过程出错，应用就不要启动了
+		panic(err)
+	}
+
+	err = dao.InitTable(db)
+	if err != nil {
+		panic(err)
+	}
+	return db
 }
