@@ -11,6 +11,7 @@ import (
 )
 
 var (
+	// ErrUserDuplicateEmail 在 dao 这一层，我们专为了 ErrUserDuplicateEmail 错误，并且将这个错误一路往上返回。
 	ErrUserDuplicateEmail = errors.New("邮箱冲突")
 	ErrUserNotFound       = gorm.ErrRecordNotFound
 )
@@ -58,6 +59,8 @@ func (dao *UserDAO) Insert(ctx context.Context, u User) error {
 	u.Utime = now
 	u.Ctime = now
 	err := dao.db.WithContext(ctx).Create(&u).Error
+
+	//怎么知道用户的邮件冲突了呢？ 答案就是，我们需要拿到数据库的唯一索引冲突错误。 在这里，我们需要用 MySQL GO 驱动的 error 定义，找到准确的错误。
 	if mysqlErr, ok := err.(*mysql.MySQLError); ok {
 		const uniqueConflictsErrNo uint16 = 1062
 		if mysqlErr.Number == uniqueConflictsErrNo {

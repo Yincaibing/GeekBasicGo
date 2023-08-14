@@ -50,3 +50,7 @@ func (svc *UserService) SignUp(ctx context.Context, u domain.User) error {
 	// 然后就是，存起来
 	return svc.repo.Create(ctx, u)
 }
+
+func (svc *UserService) Profile(ctx context.Context, u domain.Profile) {
+
+}

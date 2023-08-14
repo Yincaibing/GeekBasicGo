@@ -6,7 +6,6 @@ import (
 	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/service"
 	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web"
 	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web/middleware"
-	_ "github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web/middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -43,7 +42,7 @@ func initWebserver() *gin.Engine {
 	server.Use(cors.New(cors.Config{
 		//AllowOrigins: []string{"*"},
 		//AllowMethods: []string{"POST", "GET"},
-		AllowHeaders: []string{"Content-Type", "Authorization"},
+		//AllowHeaders: []string{"Content-Type", "Authorization"},
 		//ExposeHeaders: []string{"x-jwt-token"},
 		// 是否允许你带 cookie 之类的东西
 		AllowCredentials: true,

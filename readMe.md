@@ -18,3 +18,12 @@ docker exec -it mysql bash
 4、查看 docker 容器 mysql 日志
 docker logs YCB-mysql
 
+
+
+
+
+# 将应用打包成 docker镜像
+1、cd webook
+2、首先在本地完成编译，生成一个可在 Linux 平台上执行的 webook 可执行文件：GOOS=linux GOARCH=arm go build -o webook .
+3、docker build -t flycash/webook:v0.0.1 .
+

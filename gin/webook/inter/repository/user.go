@@ -12,6 +12,7 @@ import (
 )
 
 var (
+	// 1、最底层的错误
 	ErrUserDuplicateEmail = errors.New("邮箱冲突")
 	ErrUserNotFound       = gorm.ErrRecordNotFound
 )

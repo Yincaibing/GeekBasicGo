@@ -13,3 +13,14 @@ type User struct {
 
 //type Address struct {
 //}
+
+// 昵称：字符串，你需要考虑允许的长度。
+// 生日：前端输入为 1992-01-01 这种字符串。
+// 个人简介：一段文本，你需要考虑允许的长度。
+type Profile struct {
+	Id         int64
+	NickName   string
+	BirthDate  string
+	Ctime      time.Time
+	PersonDesc string
+}
