@@ -1,0 +1,13 @@
+apiVersion: v1 # 只有 Deployment.yaml 你是没办法从外面访问的，你需要 将 Pod 封装为一个逻辑上的服务，即 Service。
+kind: Service
+metadata:
+    name: webook
+spec:
+    type: LoadBalancer   #给谁负载均衡？给 selector 里面筛选出来的 Pod 做负载均衡
+    ports:
+      - port: 8080 #外部访问的端口
+        name: http #备注这个端口用于 http
+        targetPort: 8080 #转发请啊求的时候，应该转发到pod的哪个接口
+        protocol: TCP  #这个端口监听什么协议
+    selector:
+      app: webook

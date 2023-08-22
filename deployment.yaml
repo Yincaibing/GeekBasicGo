@@ -1,0 +1,20 @@
+apiVersion: apps/v1     #只有 Deployment 你是没办法从外面访问的，你需要 将 Pod 封装为一个逻辑上的服务，即 Service。
+kind: Deployment  #确定我们创建的是一个Deployment资源。
+metadata:
+  name: webook
+spec: #描述了资源的具体状态。
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webook
+  template: #定义了用于创建Pod的模板，这里可以定义多个 不同pod
+    metadata:
+      labels:
+        app: webook
+    spec: # 这是pod的spec，描述了pod内部的容器和卷
+      containers:  #这里定义了pod中运行的容器
+        - name: webook  #定义了容器的名字。
+          #在你的Dockerfile中引用image时，`your_docker_id/your_app_name`代表了你在DockerHub上创建的repository，其中`your_app_name`就是你创建的repository的名字。
+          image: yincaibing123/gin_practice #定义了容器用于运行的镜像。          image: Image    #这个值是执行docker build -t 命令后的参数名称
+          ports: #定义了存放容器端口设置的列表
+            - containerPort: 8080 # 这是容器需要暴露的端口号，应用程序用于接收流量
