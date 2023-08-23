@@ -34,7 +34,7 @@ WORKDIR /root/
 COPY --from=bui /app/server .
 
 # Expose the app on port 8080.  
-EXPOSE 8080 
+EXPOSE 8081
 
 # Run the application.
 CMD ["./server"] 

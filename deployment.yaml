@@ -3,7 +3,7 @@ kind: Deployment  #确定我们创建的是一个Deployment资源。
 metadata:
   name: webook
 spec: #描述了资源的具体状态。
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: webook
@@ -17,4 +17,4 @@ spec: #描述了资源的具体状态。
           #在你的Dockerfile中引用image时，`your_docker_id/your_app_name`代表了你在DockerHub上创建的repository，其中`your_app_name`就是你创建的repository的名字。
           image: yincaibing123/gin_practice #定义了容器用于运行的镜像。          image: Image    #这个值是执行docker build -t 命令后的参数名称
           ports: #定义了存放容器端口设置的列表
-            - containerPort: 8080 # 这是容器需要暴露的端口号，应用程序用于接收流量
+            - containerPort: 8081 # 这是容器需要暴露的端口号，应用程序用于接收流量

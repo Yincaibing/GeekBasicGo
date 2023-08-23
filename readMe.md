@@ -9,9 +9,20 @@ git push -u origin main
 1、启动 mysql：
 docker run --name ycbmysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ycbpassword -d --network=mynetwork mysql:tag  这个network是 Docker 网络。例如运行 docker network create mynetwork，其中 "mynetwork" 是你自定义的网络名称。
 
-2、链接mysql:
+2、运行mysql:
 docker run -it --network some-network --rm mysql mysql -hsome-mysql -uYCBmysql-user -p
 
+docker run -dp 127.0.0.1:3306:3306 \
+-w /app -v "$(pwd):/app" \
+--network  geekbasicgo_default --network-alias mysql \
+-e MYSQL_ROOT_PASSWORD=ycbpassword \
+-e MYSQL_DATABASE=webook \
+node:18-alpine
+mysql:latest
+
+docker exec -it <mysql-container-id> mysql -u root -p   确认链接是否 ok,然后 exit退出
+
+运行 docker compose up -d 启动数据库和应用  
 3、进入 mysql容器命令
 docker exec -it mysql bash
 
@@ -27,8 +38,8 @@ docker logs YCB-mysql
 2、首先在本地完成编译，生成一个可在 Linux 平台上执行的 webook 可执行文件：GOOS=linux GOARCH=arm go build -o webook .
 3、docker build -t  webook .   这里要注意 dockerfile和 main.go和 go.sum要在同一个路径下
 4、docker run -d -p 8080:8080 --network=mynetwork webook 运行镜像
-5、docker tag local-image:latest  gin_practice:v1.0 给镜像打标签
-6、    就可以用镜像标签推送：  docker push gin_practice:v1.0
+5、docker tag webook:latest  gin_practice:v1.0 给镜像打标签
+6、就可以用镜像标签推送：  docker push gin_practice:v1.0
 
 # 2、k8s上部署我的应用
 前提：在启动 service之前，需要确认 docker和 minikube本地docker集群是否启动，命令：
@@ -41,3 +52,5 @@ minikube status
 2、如果你还需要对外暴露这个应用，你可以创建一个 service
 运行命令：kubectl apply -f service.yaml
 3、minikube service webook
+
+

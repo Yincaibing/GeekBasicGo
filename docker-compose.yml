@@ -4,29 +4,32 @@ version: '3.1'
 services:
   app:  #webook
     build:
-      context: /app
+      context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # 按照你的应用实际开放端口进行设置，这里表示将容器的8080端口映射到宿主机的8080端口。
+      - "127.0.0.1:8081:8080" # 按照你的应用实际开放端口进行设置，这里表示将容器的8080端口映射到宿主机的8080端口。
     links:
       - db # 如果你的应用需要连接到数据库，你需要在这里设置。该参数可以让服务之间相互链接，这里的 "db" 表示app服务可以访问db服务。
-    networks:
-      - app-network
+    networks: # geekbasicgo_default,这个值是 docker network ls 命令筛选出来的
+      - host   
   db:
     image: mysql:latest
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
     # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=ycbpassword
+
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ycbpassword
     networks:
-      - app-network
+      - host
     ports:
-      #      注意这里我映射为了 13316 端口
-      - "3306:3306"
+      #      注意这里我映射为了 3308 端口
+      - "3308:3306"
 
 # 如果你的应用和数据库服务需要在同一网络下，可以在这里设置网络
 networks:
   app-network:
-    driver: bridge
+    driver: host
+  host:
+
