@@ -51,6 +51,8 @@ minikube status
 运行命令：kubectl apply -f deployment.yaml
 2、如果你还需要对外暴露这个应用，你可以创建一个 service
 运行命令：kubectl apply -f service.yaml
-3、minikube service webook
+3、minikube service webook    启动service
+
+
 
 
