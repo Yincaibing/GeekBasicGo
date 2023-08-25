@@ -4,7 +4,7 @@ FROM golang:latest as  bui
 WORKDIR /app
 
 # Copy the local package files to the container's workspace.
-COPY . .
+COPY .. .
 
 # Set up the Go environment and build the application.
 ENV CGO_ENABLED=0 

@@ -1,8 +1,8 @@
 package web
 
 import (
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/domain"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/service"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/domain"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/service"
 	regexp "github.com/dlclark/regexp2"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

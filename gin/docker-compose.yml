@@ -4,7 +4,7 @@ version: '3.1'
 services:
   app:  #webook
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:8081:8080" # 按照你的应用实际开放端口进行设置，这里表示将容器的8080端口映射到宿主机的8080端口。

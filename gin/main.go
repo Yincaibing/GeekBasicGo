@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository/dao"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/service"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/web/middleware"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/repository"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/repository/dao"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/service"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/web"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/web/middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"

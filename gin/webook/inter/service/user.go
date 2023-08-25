@@ -4,8 +4,8 @@ package service
 import (
 	"context"
 	"errors"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/domain"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/domain"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

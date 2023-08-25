@@ -6,8 +6,8 @@ package repository
 import (
 	"context"
 	"errors"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/domain"
-	"github.com/Yincaibing/GeekBasicGo/gin/webook/inter/repository/dao"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/domain"
+	"github.com/Yincaibing/GeekBasicGo/webook/inter/repository/dao"
 	"gorm.io/gorm"
 )
 
